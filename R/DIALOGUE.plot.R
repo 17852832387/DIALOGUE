@@ -79,15 +79,16 @@ DIALOGUE.plot.av<-function(R,MCPs,mark.samples = NULL,d = 1,k = R$k["DIALOGUE"],
 }
 
 DIALOGUE.plot.sig.comp<-function(R,main = ""){
-print('82')
   R$MCPs<-R$MCPs[laply(R$MCPs,length)>1]
-print('84')
   genes<-unique(sort(unlist(R$MCPs)))
-print('86')
   f<-function(sig1,d = 1){
+print('86')
     if(d==1){
+print('87')
       b<-!grepl(".down",names(sig1))
+print('88')
     }else{
+print('89')
       b<-grepl(".down",names(sig1))
     }
     if(!any(b)){return(rep("",length(genes)))}
