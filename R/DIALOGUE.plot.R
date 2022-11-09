@@ -90,18 +90,17 @@ DIALOGUE.plot.sig.comp<-function(R,main = ""){
     if(!any(b)){return(rep("",length(genes)))}
     sig1<-sig1[b]
     names(sig1)<-gsub(".up","",names(sig1))
-print('93')
     names(sig1)<-gsub(".down","",names(sig1))
-print('94')
     v<-list.2.ids(genes,sig1)
-print('95')
     return(c(v))
-print('96')
   }
+print('97')
   m1<-t(laply(R$MCPs,f))
+print('98')
   m2<-t(laply(R$MCPs,function(x) f(x,-1)))
-
+print('99')
   colnames(m1)<-paste0(names(R$MCPs),".up")
+print('100')
   colnames(m2)<-paste0(names(R$MCPs),".down")
   m<-cbind(m1,m2)
   idx<-R$cell.types
