@@ -156,6 +156,7 @@ print('121')
   multiplot.util(list(NULL,p,NULL),cols = 1,nplots = 3)
 print('122')             
   return(m2)
+print('123') 
 }
 
 DIALOGUE.violin.pheno<-function(R,pheno = "pathology",MCPs,selected.samples,d = 1){
