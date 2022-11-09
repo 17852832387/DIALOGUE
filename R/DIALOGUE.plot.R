@@ -82,17 +82,17 @@ DIALOGUE.plot.sig.comp<-function(R,main = ""){
   R$MCPs<-R$MCPs[laply(R$MCPs,length)>1]
   genes<-unique(sort(unlist(R$MCPs)))
   f<-function(sig1,d = 1){
-print('86')
     if(d==1){
-print('87')
       b<-!grepl(".down",names(sig1))
-print('88')
     }else{
-print('89')
       b<-grepl(".down",names(sig1))
+print('89')
     }
+print('90')
     if(!any(b)){return(rep("",length(genes)))}
+print('91')
     sig1<-sig1[b]
+print('92')
     names(sig1)<-gsub(".up","",names(sig1))
     names(sig1)<-gsub(".down","",names(sig1))
     v<-list.2.ids(genes,sig1)
