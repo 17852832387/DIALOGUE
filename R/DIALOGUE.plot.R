@@ -87,76 +87,44 @@ DIALOGUE.plot.sig.comp<-function(R,main = ""){
     }else{
       b<-grepl(".down",names(sig1))
     }
-print('90')
     if(!any(b)){return(rep("",length(genes)))}
-print('91')
     sig1<-sig1[b]
-print('92')
     names(sig1)<-gsub(".up","",names(sig1))
-print('93')
     names(sig1)<-gsub(".down","",names(sig1))
-print('94')
     v<-list.2.ids(genes,sig1)
-print('95')
     return(c(v))
-print('96')
   }
-print('97')
   m1<-t(laply(R$MCPs,f))
   m1<-t(m1)
-print('98')
   m2<-t(laply(R$MCPs,function(x) f(x,-1)))
   m2<-t(m2)            
-print('99')
 print(head(m1))
 print(dim(m1))
 print(names(R$MCPs))              
-  colnames(m1)<-paste0(names(R$MCPs),".up")
-print('100')              
-  colnames(m2)<-paste0(names(R$MCPs),".down")
-print('101')              
-  m<-cbind(m1,m2)
-print('102')              
-  idx<-R$cell.types
-print('103')              
-  idxA<-idx
-print('104')              
-  for(i in 2:length(idx)){
-print('105')    
-    idxA<-c(idxA,apply(combn(idx,i),2,function(x) paste(x,collapse = "&")))
-print('106')                       
-  }
-print('107')                       
-  idxA
-print('108')                       
-  m1<-laply(idxA,function(x) colSums(m==x))
-print('109')             
-  rownames(m1)<-idxA
-print('110')             
-  b<-stri_count(str = rownames(m1),regex = "&")>1
-print('111')             
-  m2<-rbind(m1[!b,],colSums(subset.matrix(m1,b)))
-print('112')             
-  rownames(m2)[nrow(m2)]<-"> 2 cell types"
-print('113')             
-  if(all(m2["> 2 cell types",]==0)){m2<-m2[1:(nrow(m2)-1),]}
-print('114')             
-  m1<-melt(m2)
-print('115')             
-  colnames(m1)<-c("col","x","y")
-print('116')             
+  colnames(m1)<-paste0(names(R$MCPs),".up")             
+  colnames(m2)<-paste0(names(R$MCPs),".down")             
+  m<-cbind(m1,m2)             
+  idx<-R$cell.types             
+  idxA<-idx             
+  for(i in 2:length(idx)){   
+    idxA<-c(idxA,apply(combn(idx,i),2,function(x) paste(x,collapse = "&")))                     
+  }                      
+  idxA                       
+  m1<-laply(idxA,function(x) colSums(m==x))            
+  rownames(m1)<-idxA            
+  b<-stri_count(str = rownames(m1),regex = "&")>1            
+  m2<-rbind(m1[!b,],colSums(subset.matrix(m1,b)))            
+  rownames(m2)[nrow(m2)]<-"> 2 cell types"             
+  if(all(m2["> 2 cell types",]==0)){m2<-m2[1:(nrow(m2)-1),]}            
+  m1<-melt(m2)             
+  colnames(m1)<-c("col","x","y")            
   p<-ggplot(data=m1, aes(x=x, y=y, fill=col))+geom_bar(stat="identity")+
-    labs(fill = "Cell type(s)", x = "Program", y = "No. of genes")
-print('118')             
+    labs(fill = "Cell type(s)", x = "Program", y = "No. of genes")            
   p<-p+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-             panel.background = element_blank(), axis.line = element_line(colour = "black"))
-print('120')             
-  p<-p+theme(text = element_text(size=12),axis.text.x = element_text(angle=45, hjust=1))
-print('121')             
-  multiplot.util(list(NULL,p,NULL),cols = 1,nplots = 3)
-print('122')             
+             panel.background = element_blank(), axis.line = element_line(colour = "black"))             
+  p<-p+theme(text = element_text(size=12),axis.text.x = element_text(angle=45, hjust=1))             
+  multiplot.util(list(NULL,p,NULL),cols = 1,nplots = 3)            
   return(m2)
-print('123') 
 }
 
 DIALOGUE.violin.pheno<-function(R,pheno = "pathology",MCPs,selected.samples,d = 1){
