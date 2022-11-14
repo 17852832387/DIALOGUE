@@ -96,7 +96,6 @@ DIALOGUE1<-function(rA,k = 5,main,results.dir = "~/Desktop/DIALOGUE.results/",co
                     covar = c("cellQ","tme.qc","sex","pathology"),n.genes = 200,PMD2 = F,extra.sparse = F,
                     averaging.function = colMeans,p.anova = 0.05,specific.pair = NULL,center.flag = F,
                     seed1 = 1234,bypass.emp = F,abn.c = 15,spatial.flag = F){
-  
   print("#************DIALOGUE Step I: PMD ************#")
   dir.create(results.dir)
   X<-lapply(rA, function(r){
