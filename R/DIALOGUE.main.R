@@ -100,10 +100,13 @@ DIALOGUE1<-function(rA,k = 5,main,results.dir = "~/Desktop/DIALOGUE.results/",co
   print("#************DIALOGUE Step I: PMD ************#")
   dir.create(results.dir)
   X<-lapply(rA, function(r){
+    print(r@name)
     X1<-average.mat.rows(r@X,r@samples,f = averaging.function)
     if(spatial.flag){return(X1)}
     b<-get.abundant(r@samples,abn.c = abn.c,boolean.flag = T)
+    print('105 start')
     p<-p.adjust(apply.anova(X = r@X[b,],y = r@samples[b],MARGIN = 2),method = "BH")
+    print('105 end')
     print(paste0(r@name,": Removing ",sum(p>p.anova)," of ",length(p)," features."))
     if(sum(p<p.anova)<5){
       err.message1<-paste("Only",sum(p<p.anova),r@name,"features passed the ANOVA filter. Try rerunning without",r@name)
