@@ -104,6 +104,9 @@ DIALOGUE1<-function(rA,k = 5,main,results.dir = "~/Desktop/DIALOGUE.results/",co
     if(spatial.flag){return(X1)}
     b<-get.abundant(r@samples,abn.c = abn.c,boolean.flag = T)
     print('105 start')
+    print(b)
+    print(r@X[b,])
+    print(r@samples[b])
     p<-p.adjust(apply.anova(X = r@X[b,],y = r@samples[b],MARGIN = 2),method = "BH")
     print('105 end')
     print(paste0(r@name,": Removing ",sum(p>p.anova)," of ",length(p)," features."))
