@@ -433,9 +433,11 @@ DIALOGUE2.mixed.effects<-function(r1,x,sig2,frm = "y ~ (1 | samples) + x + cellQ
   # r1 was a cell.type S4 that was converted to a list.
   genes<-unlist(sig2[paste0(x,c(".up",".down"))])
   b<-is.element(genes,rownames(r1$tme))
-  p<-apply.formula.HLM(r1,r1$scores[,x],
+  print('apply start')
+  p<-apply.formula.HLM(r1,r1$scores[,x],                    
                        X = r1$tme[genes[b],],
                        MARGIN = 1,formula = frm)
+  print('apply end')
   p$pval<-p.adjust(p$P,method = "BH")
   p$up<-is.element(rownames(p),sig2[[paste0(x,".up")]])
   if(all(b)){return(p)}
