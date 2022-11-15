@@ -434,6 +434,9 @@ DIALOGUE2.mixed.effects<-function(r1,x,sig2,frm = "y ~ (1 | samples) + x + cellQ
   genes<-unlist(sig2[paste0(x,c(".up",".down"))])
   b<-is.element(genes,rownames(r1$tme))
   print('apply start')
+  print(b)
+  print(genes[b])
+  print(dim(r1$tme))
   p<-apply.formula.HLM(r1,r1$scores[,x],                    
                        X = r1$tme[genes[b],],
                        MARGIN = 1,formula = frm)
