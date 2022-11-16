@@ -404,15 +404,15 @@ DIALOGUE2.pair<-function(R,r1,r2,cell.types,results.dir){
   f1<-function(sig1,sig2,x){
     p1<-DIALOGUE2.mixed.effects(r2a,x,sig1,R$frm)
     p2<-DIALOGUE2.mixed.effects(r1a,x,sig2,R$frm)
-    print(len(p1[!is.na(p1$Z),]))
-    if(len(p1[!is.na(p1$Z),])>0){
+    print(rownames(p1))
+    if(rownames(p1)[1]=='unknown'){
       sig1f<-intersect.list1(get.top.cor(p1[!is.na(p1$Z),],q = 100,idx = "Z",min.ci = 1),r1@genes)
       names(sig1f)<-gsub("Z.",paste0(x,"."),names(sig1f))
     }else{
       sig1f<-NULL
     }
-    print(len(p2[!is.na(p2$Z),]))
-    if(len(p2[!is.na(p2$Z),])>0){
+    print(rownames(p2))
+    if(rownames(p2)[1]=='unknown'){
       sig2f<-intersect.list1(get.top.cor(p2[!is.na(p2$Z),],q = 100,idx = "Z",min.ci = 1),r2@genes)
       names(sig2f)<-gsub("Z.",paste0(x,"."),names(sig2f))
     }else{
