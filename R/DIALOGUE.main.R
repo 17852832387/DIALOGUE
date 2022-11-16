@@ -433,17 +433,22 @@ DIALOGUE2.mixed.effects<-function(r1,x,sig2,frm = "y ~ (1 | samples) + x + cellQ
   # r1 was a cell.type S4 that was converted to a list.
   genes<-unlist(sig2[paste0(x,c(".up",".down"))])
   b<-is.element(genes,rownames(r1$tme))
-  print('apply start')
-  print(b)
-  print(genes[b])
-  print(dim(r1$tme))
-  print(r1$tme[genes[b],])
-  p<-apply.formula.HLM(r1,r1$scores[,x],                    
+  #print('apply start')
+  #print(b)
+  #print(genes[b])
+  #print(dim(r1$tme))
+  #print(r1$tme[genes[b],])
+  if(is.null(r1$tme[genes[b],])){
+    p <- data.frame(matrix(ncol=3,nrow=1))
+    colnames(p) <- c("Estimate","P","Z","pval","up")
+    rownames(p) <- c("Null")
+   }else{
+    p <- apply.formula.HLM(r1,r1$scores[,x],                    
                        X = r1$tme[genes[b],],
                        MARGIN = 1,formula = frm)
-  print('apply end')
-  p$pval<-p.adjust(p$P,method = "BH")
-  p$up<-is.element(rownames(p),sig2[[paste0(x,".up")]])
+    p$pval<-p.adjust(p$P,method = "BH")
+    p$up<-is.element(rownames(p),sig2[[paste0(x,".up")]])
+   }
   if(all(b)){return(p)}
   P<-get.mat(genes,colnames(p))
   P[b,]<-as.matrix(p)
