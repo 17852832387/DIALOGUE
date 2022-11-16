@@ -189,7 +189,8 @@ apply.formula.HLM<-function(r,X,Y,MARGIN = 1,formula = "y ~ (1 | samples) + x",t
   }else{
     print('matrixX')
     print (dim(X))
-    if(is.null(X)){
+    if(is.null(dim(X))){
+        print(X)
         p <- data.frame(matrix(ncol=2,nrow=1))
         colnames(p) <- c("Estimate","Pr(>|t|)")
         rownames(p) <- c("Null")
