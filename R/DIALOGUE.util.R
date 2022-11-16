@@ -182,10 +182,15 @@ apply.formula.HLM<-function(r,X,Y,MARGIN = 1,formula = "y ~ (1 | samples) + x",t
       de.ttest<-cbind.data.frame(sample = de1[,"zscores"],cell = de2[,"zscores"])[b,]
       Y<-Y[b,]
     }
+    print('matrixY')
+    print (dim(Y))
     m<-t(apply(Y,MARGIN = MARGIN,function(y){formula.HLM(y,X,r,formula = formula)}))
+    print (m)
   }else{
+    print('matrixX')
     print (dim(X))
     m<-t(apply(X,MARGIN = MARGIN,function(x){formula.HLM(Y,x,r,formula = formula)}))
+    print (m)
   }
   colnames(m)<-c("Estimate","P")
   m<-cbind.data.frame(Z = get.cor.zscores(m[,"Estimate"],m[,"P"]),m)
