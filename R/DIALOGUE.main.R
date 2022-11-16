@@ -403,27 +403,21 @@ DIALOGUE2.pair<-function(R,r1,r2,cell.types,results.dir){
   
   f1<-function(sig1,sig2,x){
     p1<-DIALOGUE2.mixed.effects(r2a,x,sig1,R$frm)
-    print('p1')
-    print(p1)
     p2<-DIALOGUE2.mixed.effects(r1a,x,sig2,R$frm)
-    print('p2')
-    print(p2)
-    print(p1[!is.na(p1$Z),])
-    print(get.top.cor(p1[!is.na(p1$Z),],q = 100,idx = "Z",min.ci = 1))
-    sig1f<-intersect.list1(get.top.cor(p1[!is.na(p1$Z),],q = 100,idx = "Z",min.ci = 1),r1@genes)
-    print('sig1f')
-    print(sig1f)
-    print(p2[!is.na(p2$Z),])
-    print(get.top.cor(p2[!is.na(p2$Z),],q = 100,idx = "Z",min.ci = 1))
-    sig2f<-intersect.list1(get.top.cor(p2[!is.na(p2$Z),],q = 100,idx = "Z",min.ci = 1),r2@genes)
-    print('sig2f')
-    print(sig2f)
-    names(sig1f)<-gsub("Z.",paste0(x,"."),names(sig1f))
-    print('sig1f')
-    print(sig1f)
-    names(sig2f)<-gsub("Z.",paste0(x,"."),names(sig2f))
-    print('sig2f')
-    print(sig2f)
+    print(len(p1[!is.na(p1$Z),]))
+    if(len(p1[!is.na(p1$Z),])>0){
+      sig1f<-intersect.list1(get.top.cor(p1[!is.na(p1$Z),],q = 100,idx = "Z",min.ci = 1),r1@genes)
+      names(sig1f)<-gsub("Z.",paste0(x,"."),names(sig1f))
+    }else{
+      sig1f<-NULL
+    }
+    print(len(p2[!is.na(p2$Z),]))
+    if(len(p2[!is.na(p2$Z),])>0){
+      sig2f<-intersect.list1(get.top.cor(p2[!is.na(p2$Z),],q = 100,idx = "Z",min.ci = 1),r2@genes)
+      names(sig2f)<-gsub("Z.",paste0(x,"."),names(sig2f))
+    }else{
+      sig2f<-NULL
+    }
     p1$program<-x;
     print('p1')
     print(p1)
