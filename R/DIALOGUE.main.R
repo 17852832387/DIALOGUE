@@ -440,13 +440,14 @@ DIALOGUE2.mixed.effects<-function(r1,x,sig2,frm = "y ~ (1 | samples) + x + cellQ
   print(b)
   print('genes[b]')
   print(genes[b])
-  #print(dim(r1$tme))
+  print('dim(r1$tme)')
+  print(dim(r1$tme))
+  print('r1$tme[genes[b],]')
   print(r1$tme[genes[b],])
-  print(is.null(r1$tme[genes[b],]))
-  if(is.null(r1$tme[genes[b],])){
-    p <- data.frame(matrix(ncol=3,nrow=1))
+  if(is.null(dim(r1$tme[genes[b],]))){
+    p <- data.frame(matrix(ncol=5,nrow=1))
     colnames(p) <- c("Estimate","P","Z","pval","up")
-    rownames(p) <- c("Null")
+    rownames(p) <- c("Unknown")
    }else{
     p <- apply.formula.HLM(r1,r1$scores[,x],                    
                        X = r1$tme[genes[b],],
@@ -456,9 +457,15 @@ DIALOGUE2.mixed.effects<-function(r1,x,sig2,frm = "y ~ (1 | samples) + x + cellQ
    }
   print(p)
   if(all(b)){return(p)}
+  print('P')
   P<-get.mat(genes,colnames(p))
+  print(P)
+  print('P[b,]')
   P[b,]<-as.matrix(p)
+  print(P[b,])
+  print('new P')
   rownames(P)<-gsub(".","-",rownames(P),fixed = T)
+  print(P)
   P<-as.data.frame(P)
   return(P)
 }
