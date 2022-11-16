@@ -403,13 +403,35 @@ DIALOGUE2.pair<-function(R,r1,r2,cell.types,results.dir){
   
   f1<-function(sig1,sig2,x){
     p1<-DIALOGUE2.mixed.effects(r2a,x,sig1,R$frm)
+    print('p1')
+    print(p1)
     p2<-DIALOGUE2.mixed.effects(r1a,x,sig2,R$frm)
+    print('p2')
+    print(p2)
     sig1f<-intersect.list1(get.top.cor(p1[!is.na(p1$Z),],q = 100,idx = "Z",min.ci = 1),r1@genes)
+    print('sig1f')
+    print(sig1f)
     sig2f<-intersect.list1(get.top.cor(p2[!is.na(p2$Z),],q = 100,idx = "Z",min.ci = 1),r2@genes)
+    print('sig2f')
+    print(sig2f)
     names(sig1f)<-gsub("Z.",paste0(x,"."),names(sig1f))
+    print('sig1f')
+    print(sig1f)
     names(sig2f)<-gsub("Z.",paste0(x,"."),names(sig2f))
-    p1$program<-x;p2$program<-x
-    p1$genes<-rownames(p1);p2$genes<-rownames(p2)
+    print('sig2f')
+    print(sig2f)
+    p1$program<-x;
+    print('p1')
+    print(p1)
+    p2$program<-x
+    print('p2')
+    print(p2)
+    p1$genes<-rownames(p1);
+    print('p1')
+    print(p1)
+    p2$genes<-rownames(p2)
+    print('p2')
+    print(p2)
     results<-list(p1 = p1,p2 = p2,sig1f = sig1f,sig2f = sig2f)
     return(results)
   }
@@ -433,17 +455,7 @@ DIALOGUE2.mixed.effects<-function(r1,x,sig2,frm = "y ~ (1 | samples) + x + cellQ
   # r1 was a cell.type S4 that was converted to a list.
   genes<-unlist(sig2[paste0(x,c(".up",".down"))])
   b<-is.element(genes,rownames(r1$tme))
-  #print('apply start')
-  print('genes')
-  print(genes)
-  print('b')
-  print(b)
-  print('genes[b]')
-  print(genes[b])
-  print('dim(r1$tme)')
-  print(dim(r1$tme))
-  print('r1$tme[genes[b],]')
-  print(r1$tme[genes[b],])
+  
   if(is.null(dim(r1$tme[genes[b],]))){
     p <- data.frame(matrix(ncol=5,nrow=1))
     colnames(p) <- c("Estimate","P","Z","pval","up")
@@ -456,6 +468,7 @@ DIALOGUE2.mixed.effects<-function(r1,x,sig2,frm = "y ~ (1 | samples) + x + cellQ
     p$up<-is.element(rownames(p),sig2[[paste0(x,".up")]])
    }
   print(p)
+  print(all(b))
   if(all(b)){return(p)}
   print('P')
   P<-get.mat(genes,colnames(p))
