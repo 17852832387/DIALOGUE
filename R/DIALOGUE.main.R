@@ -437,7 +437,8 @@ DIALOGUE2.mixed.effects<-function(r1,x,sig2,frm = "y ~ (1 | samples) + x + cellQ
   #print(b)
   #print(genes[b])
   #print(dim(r1$tme))
-  #print(r1$tme[genes[b],])
+  print(r1$tme[genes[b],])
+  print(is.null(r1$tme[genes[b],]))
   if(is.null(r1$tme[genes[b],])){
     p <- data.frame(matrix(ncol=3,nrow=1))
     colnames(p) <- c("Estimate","P","Z","pval","up")
@@ -449,6 +450,7 @@ DIALOGUE2.mixed.effects<-function(r1,x,sig2,frm = "y ~ (1 | samples) + x + cellQ
     p$pval<-p.adjust(p$P,method = "BH")
     p$up<-is.element(rownames(p),sig2[[paste0(x,".up")]])
    }
+  print(p)
   if(all(b)){return(p)}
   P<-get.mat(genes,colnames(p))
   P[b,]<-as.matrix(p)
