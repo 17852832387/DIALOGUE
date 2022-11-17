@@ -369,6 +369,10 @@ t.test.mat<-function(m,b,two.sided=F,rankf = F,fold.changeF = F){
     p<-as.matrix(apply(m,1,function(x) t.test(x[b],x[!b])$p.value))
   }else{
     p<-t(apply(m,1,function(x) {
+                  print('x[b]')
+                  print(x[b])
+                  print('x[!b]')
+                  print(x[!b])
                   print('length(x[b])')
                   print(length(x[b]))
                   print('length(x[!b])')
