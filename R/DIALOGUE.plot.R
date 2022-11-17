@@ -161,8 +161,10 @@ DIALOGUE.violin.pheno<-function(R,pheno = "pathology",MCPs,selected.samples,d = 
   for(x in R$scores){
     print('x')
     print(x)
-    x[,1:k]<-cap.mat(center.matrix(x[,1:k],dim = 2,sd.flag = T),cap = 0.01,MARGIN = 2)
     print('x[,1:k]')
+    print(x[,1:k])
+    x[,1:k]<-cap.mat(center.matrix(x[,1:k],dim = 2,sd.flag = T),cap = 0.01,MARGIN = 2)
+    print('x[,1:k] cap')
     print(x[,1:k])
     X<-rbind(X,x)
     X<-X[!is.na(X[,pheno]),]
