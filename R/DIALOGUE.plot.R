@@ -79,6 +79,8 @@ DIALOGUE.plot.av<-function(R,MCPs,mark.samples = NULL,d = 1,k = R$k["DIALOGUE"],
     print(m1)
     m1[is.na(m1)] <- 0
     print(m1)
+    print(colSums(m1))
+    print(colSums(m1)>0)
     m1 <- m1[colSums(m1)>0]
     print(m1)
     if(length(R$MCP.cell.types[[i]])<2){return()}
