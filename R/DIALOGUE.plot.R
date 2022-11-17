@@ -176,22 +176,12 @@ DIALOGUE.violin.pheno<-function(R,pheno = "pathology",MCPs,selected.samples,d = 
   par(mfrow=c(1,1),oma = c(5, 0, 0, 7))
   f<-function(x){
     b<-is.element(X$cell.type,R$MCP.cell.types[[x]])
-    print('x')
-    print(x)
-    print('b')
-    print(b)
-    print('d')
-    print(d)
-    print('d*X[b,x]')
-    print(d*X[b,x])
     violin.split(scores = d*X[b,x],treatment = X[b,pheno],
                  conditions = X$id[b],
                  main = x)
     return(x)
   }
   if(missing(MCPs)){MCPs<-paste0("MCP",1:k)}
-  print('missing(MCPs)')
-  print(MCPs)
   laply(MCPs,f)
   return()
 
