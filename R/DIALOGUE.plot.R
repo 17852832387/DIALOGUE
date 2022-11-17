@@ -146,7 +146,7 @@ DIALOGUE.plot.sig.comp<-function(R,main = ""){
     labs(fill = "Cell type(s)", x = "Program", y = "No. of genes")            
   p<-p+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
              panel.background = element_blank(), axis.line = element_line(colour = "black"))             
-  p<-p+theme(text = element_text(size=12),axis.text.x = element_text(angle=45, hjust=1))             
+  p<-p+theme(text = element_text(size=4),axis.text.x = element_text(angle=45, hjust=1),panel.margin=0.1)             
   multiplot.util(list(NULL,p,NULL),cols = 1,nplots = 3)            
   return(m2)
 }
@@ -166,6 +166,14 @@ DIALOGUE.violin.pheno<-function(R,pheno = "pathology",MCPs,selected.samples,d = 
   par(mfrow=c(1,1),oma = c(5, 0, 0, 7))
   f<-function(x){
     b<-is.element(X$cell.type,R$MCP.cell.types[[x]])
+    print('x')
+    print(x)
+    print('b')
+    print(b)
+    print('d')
+    print(d)
+    print('d*X[b,x]')
+    print(d*X[b,x])
     violin.split(scores = d*X[b,x],treatment = X[b,pheno],
                  conditions = X$id[b],
                  main = x)
