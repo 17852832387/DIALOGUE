@@ -29,10 +29,13 @@ DIALOGUE.plot<-function(R,results.dir = "~/Desktop/DIALOGUE.results/",
                         pheno = NULL,mark.samples = NULL,metadata = NULL,d = 1, MCPs = 1:R$k["DIALOGUE"]){
   
   pdf(paste0(results.dir,"/",R$name,".pdf"))
+  print('DIALOGUE.plot.av')
   DIALOGUE.plot.av(R,mark.samples = mark.samples,metadata = metadata,d = d,MCPs = MCPs)
+  print('DIALOGUE.plot.sig.comp')
   DIALOGUE.plot.sig.comp(R)
   if(!is.null(pheno)){
-    DIALOGUE.violin.pheno(R,pheno = pheno,MCPs = MCPs,d = d)
+    print('DIALOGUE.violin.pheno')
+  DIALOGUE.violin.pheno(R,pheno = pheno,MCPs = MCPs,d = d)
   }
   dev.off();par(font.axis = 2);par(font.lab = 2);par(font = 2)
 }
@@ -63,9 +66,15 @@ DIALOGUE.plot.av<-function(R,MCPs,mark.samples = NULL,d = 1,k = R$k["DIALOGUE"],
   f<-function(i){
     m1<-t(laply(R$scoresAv,function(m) m[,i]))*d
     # rownames(m1)<-idx
+    print(i)
+    print('m1')
+    print(dim(m1))
     colnames(m1)<-R$cell.types
     m1<-m1[,R$MCP.cell.types[[i]]]
+    print('m1 filtered')
+    print(dim(m1))
     if(length(R$MCP.cell.types[[i]])<2){return()}
+    print('start pairs.panels')
     pairs.panels(m1,hist.col = "grey",breaks = 50,bg = col1,pch = pch,ellipses = F,
                  smooth = F,lm = T,stars = T,method = "pearson",
                  cex = size1,cex.cor = 1)
@@ -98,9 +107,14 @@ DIALOGUE.plot.sig.comp<-function(R,main = ""){
   m1<-t(m1)
   m2<-t(laply(R$MCPs,function(x) f(x,-1)))
   m2<-t(m2)            
-print(head(m1))
-print(dim(m1))
-print(names(R$MCPs))              
+  print('m1')
+  print(head(m1))
+  print(dim(m1))
+  print('m2')
+  print(head(m2))
+  print(dim(m2))
+  print('MCPs names')    
+  print(names(R$MCPs))              
   colnames(m1)<-paste0(names(R$MCPs),".up")             
   colnames(m2)<-paste0(names(R$MCPs),".down")             
   m<-cbind(m1,m2)             
