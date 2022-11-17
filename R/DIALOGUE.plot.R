@@ -69,10 +69,14 @@ DIALOGUE.plot.av<-function(R,MCPs,mark.samples = NULL,d = 1,k = R$k["DIALOGUE"],
     print(i)
     print('m1')
     print(dim(m1))
+    print(m1)
     colnames(m1)<-R$cell.types
     m1<-m1[,R$MCP.cell.types[[i]]]
     print('m1 filtered')
     print(dim(m1))
+    print(m1)
+    m1[is.na(m1)] <- 0
+    print(m1)
     if(length(R$MCP.cell.types[[i]])<2){return()}
     print('start pairs.panels')
     pairs.panels(m1,hist.col = "grey",breaks = 50,bg = col1,pch = pch,ellipses = F,
