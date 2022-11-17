@@ -146,7 +146,8 @@ DIALOGUE.plot.sig.comp<-function(R,main = ""){
     labs(fill = "Cell type(s)", x = "Program", y = "No. of genes")            
   p<-p+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
              panel.background = element_blank(), axis.line = element_line(colour = "black"))             
-  p<-p+theme(text = element_text(size=4),axis.text.x = element_text(angle=45, hjust=1),panel.margin=0.1)             
+  p<-p+theme(text = element_text(size=4),axis.text.x = element_text(angle=45, hjust=1))   
+  p<-p+theme(plot.margin = margin(t=0.1, r=0.1, b=0.1, l=0.1, unit="cm"))   
   multiplot.util(list(NULL,p,NULL),cols = 1,nplots = 3)            
   return(m2)
 }
