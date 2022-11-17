@@ -62,8 +62,8 @@ center.matrix<-function(m,dim = 1,sd.flag = F){
 
 cap.mat<-function(M,cap = 0.01,MARGIN = 1){
   Z<-apply(M,MARGIN = MARGIN,function(x){
-    q9<-quantile(x,1-cap)
-    q1<-quantile(x,cap)
+    q9<-quantile(x,1-cap, na.rm=TRUE)
+    q1<-quantile(x,cap, na.rm=TRUE)
     x[x>q9]<-q9;x[x<q1]<-q1
     return(x)
   })
