@@ -67,6 +67,8 @@ DIALOGUE.plot.av<-function(R,MCPs,mark.samples = NULL,d = 1,k = R$k["DIALOGUE"],
     m1<-t(laply(R$scoresAv,function(m) m[,i]))*d
     # rownames(m1)<-idx
     print(i)
+    print('col1')
+    print(col1)
     print('m1')
     print(dim(m1))
     print(m1)
@@ -76,6 +78,8 @@ DIALOGUE.plot.av<-function(R,MCPs,mark.samples = NULL,d = 1,k = R$k["DIALOGUE"],
     print(dim(m1))
     print(m1)
     m1[is.na(m1)] <- 0
+    print(m1)
+    m1 <- m1[colSums(m1)>0]
     print(m1)
     if(length(R$MCP.cell.types[[i]])<2){return()}
     print('start pairs.panels')
