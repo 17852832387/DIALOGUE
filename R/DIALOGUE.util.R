@@ -185,12 +185,10 @@ apply.formula.HLM<-function(r,X,Y,MARGIN = 1,formula = "y ~ (1 | samples) + x",t
     print('matrixY')
     print (dim(Y))
     m<-t(apply(Y,MARGIN = MARGIN,function(y){formula.HLM(y,X,r,formula = formula)}))
-    print (m)
   }else{
     print('matrixX')
     print (dim(X))
     if(is.null(dim(X))){
-        print(X)
         m <- data.frame(matrix(ncol=2,nrow=1))
         colnames(m) <- c("Estimate","Pr(>|t|)")
         rownames(m) <- c("Null")
@@ -198,7 +196,6 @@ apply.formula.HLM<-function(r,X,Y,MARGIN = 1,formula = "y ~ (1 | samples) + x",t
     else{
         m<-t(apply(X,MARGIN = MARGIN,function(x){formula.HLM(Y,x,r,formula = formula)}))
       }
-    print (m)
   }
   colnames(m)<-c("Estimate","P")
   m<-cbind.data.frame(Z = get.cor.zscores(m[,"Estimate"],m[,"P"]),m)
