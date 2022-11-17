@@ -368,12 +368,14 @@ t.test.mat<-function(m,b,two.sided=F,rankf = F,fold.changeF = F){
   if(two.sided){
     p<-as.matrix(apply(m,1,function(x) t.test(x[b],x[!b])$p.value))
   }else{
-    print('length(x[b])')
-    print(length(x[b]))
-    print('length(x[!b])')
-    print(length(x[!b]))
-    p<-t(apply(m,1,function(x) c(t.test(x[b],x[!b],alternative = 'greater')$p.value,
-                                 t.test(x[b],x[!b],alternative = 'less')$p.value)))
+    p<-t(apply(m,1,function(x) {
+                  print('length(x[b])')
+                  print(length(x[b]))
+                  print('length(x[!b])')
+                  print(length(x[!b]))
+                  c(t.test(x[b],x[!b],alternative = 'greater')$p.value,t.test(x[b],x[!b],alternative = 'less')$p.value)
+                  }
+      ))
     print('p')
     print(p)
     colnames(p)<-c('more','less')
