@@ -153,16 +153,25 @@ DIALOGUE.plot.sig.comp<-function(R,main = ""){
 }
 
 DIALOGUE.violin.pheno<-function(R,pheno = "pathology",MCPs,selected.samples,d = 1){
+  print('DIALOGUE.violin.pheno start')
   k<-R$k["DIALOGUE"]
+  print('k')
+  print(k)
   X<-NULL
   for(x in R$scores){
     x[,1:k]<-cap.mat(center.matrix(x[,1:k],dim = 2,sd.flag = T),cap = 0.01,MARGIN = 2)
     X<-rbind(X,x)
     X<-X[!is.na(X[,pheno]),]
   }
+  print('X')
+  print(X)
   if(!is.element("id",colnames(X))){X$id<-X$cell.type}
+  print('X if1')
+  print(X)
   # if(is.logical(X[,pheno])){X[,pheno]<-ifelse(X[,pheno],"Disease","Control")}
   if(!missing(selected.samples)){X<-X[is.element(X$samples,selected.samples),]}
+  print('X if2')
+  print(X)
   
   par(mfrow=c(1,1),oma = c(5, 0, 0, 7))
   f<-function(x){
@@ -181,6 +190,8 @@ DIALOGUE.violin.pheno<-function(R,pheno = "pathology",MCPs,selected.samples,d = 
     return(x)
   }
   if(missing(MCPs)){MCPs<-paste0("MCP",1:k)}
+  print('missing(MCPs)')
+  print(MCPs)
   laply(MCPs,f)
   return()
 
