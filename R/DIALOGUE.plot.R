@@ -265,15 +265,24 @@ violin.split<-function(scores, treatment, conditions, main = "",
   }else{
     print('if 2')
     p<-t.test.groups(x = rbind(scores,scores),b = treatment == sort(treatment,decreasing = T)[1],g = conditions)[1,]
-    print('p<-t.test.groups')
-    print(p)
-    p<-p[sort(names(p))]
-    print('p<-p[sort(names(p))]')
-    print(p)
+    
   }
+  print('p overall')
+  print(p)
   p[p<(-30)]<-(-30);p[p>30]<-30
+  print('p[p<(-30)]<-(-30);p[p>30]<-30')
+  print(p)
   if(show.pval){
+    print('conditions')
+    print(conditions)
+    print('p[conditions]')
+    print(p[conditions])
+    p[is.na(p)]<-0
+    print('p[conditions] fill 0')
+    print(p[conditions])
     conditions<-paste0(conditions,"\n",laply(10^-abs(p[conditions]),my.format.pval))
+    print('conditions after')
+    print(conditions)
   }
   treatment<-as.factor(treatment)
   print('beanplot start')
