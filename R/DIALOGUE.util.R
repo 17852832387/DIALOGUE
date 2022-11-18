@@ -369,16 +369,10 @@ t.test.mat<-function(m,b,two.sided=F,rankf = F,fold.changeF = F){
     p<-as.matrix(apply(m,1,function(x) t.test(x[b],x[!b])$p.value))
   }else{
     p<-t(apply(m,1,function(x) {
-                  print('x')
-                  print(x)
                   x[is.na(x)] <- 0
-                  print('x fill -')
-                  print(x)
                   c(t.test(x[b],x[!b],alternative = 'greater')$p.value,t.test(x[b],x[!b],alternative = 'less')$p.value)
                   }
       ))
-    print('p')
-    print(p)
     colnames(p)<-c('more','less')
     p<-cbind(p,get.p.zscores(p))
     colnames(p)[3]<-"zscores"
