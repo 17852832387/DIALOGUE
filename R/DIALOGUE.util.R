@@ -460,7 +460,15 @@ get.p.zscores<-function(p){
 
 t.test.groups<-function(x,b,g,min.n = 1,cut.off = NULL){
   x<-as.matrix(x)
+  print('x<-as.matrix(x)')
+  print(x)
+  print('g[!b]')
+  print(g[!b])
+  print('g[b]')
+  print(g[b])
   gu<-intersect(get.abundant(g[!b],min.n),get.abundant(g[b],min.n))
+  print('gu')
+  print(gu)
   if(is.null(rownames(x))){
     rownames(x)<-1:nrow(x)
   }
