@@ -581,7 +581,8 @@ DLG.multi.get.gene.pval<-function(cell.type,R){
   print('g')
   print(g)
   print(grepl(g, "_", fixed=TRUE))                             
-  if(!grepl(g, "_", fixed=TRUE)){
+  print((grepl(g, "_", fixed=TRUE)))                             
+  if(!(grepl(g, "_", fixed=TRUE))){
     gsub("Unknown", "_Unknown", g)
   }
   print('g updated')
