@@ -579,13 +579,14 @@ DLG.multi.get.gene.pval<-function(cell.type,R){
   print(m)
   g<-unique(unlist(lapply(m,rownames)))                          
   if((grepl(g, "_", fixed=TRUE))==FALSE){
+    g <- gsub("NA", "_", g)
     print('g')
     print(g)
-    g <- gsub("NA", "_", g)
-    print('g updated')
+    g <- c(g,g,g,)
+    print('g array')
     print(g)
   }
-  
+
   p<-get.strsplit(g,"_",1:2)
   print('p')
   print(p)
