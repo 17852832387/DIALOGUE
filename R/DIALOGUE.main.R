@@ -565,10 +565,21 @@ DLG.multi.get.gene.pval<-function(cell.type,R){
     return(x)
   }
   m<-c(lapply(R[b1],f1),lapply(R[b2],function(m1) f1(m1,"p2")))
+  print('===============================')
+  print('m')
+  print(m)
   g<-unique(unlist(lapply(m,rownames)))
+  print('g')
+  print(g)
   p<-get.strsplit(g,"_",1:2)
+  print('p')
+  print(p)
   colnames(p)<-c("programF","genes")
+  print('p colnames')
+  print(p)
   rownames(p)<-g
+  print('p rownames')
+  print(p)
   p<-cbind.data.frame(p,program = get.strsplit(g,".",1),
                       up = grepl("up",g))
   names(m)<-gsub(paste0(cell.type,".vs."),"",names(m))
