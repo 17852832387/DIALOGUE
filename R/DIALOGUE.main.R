@@ -571,6 +571,11 @@ DLG.multi.get.gene.pval<-function(cell.type,R){
   g<-unique(unlist(lapply(m,rownames)))
   print('g')
   print(g)
+  if(!grepl(g, "_", fixed=TRUE)){
+    gsub("Unknown", "_Unknown", g)
+  }
+  print('g updated')
+  print(g)
   p<-get.strsplit(g,"_",1:2)
   print('p')
   print(p)
