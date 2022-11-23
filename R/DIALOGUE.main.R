@@ -578,11 +578,11 @@ DLG.multi.get.gene.pval<-function(cell.type,R){
   print('m')
   print(m)
   g<-unique(unlist(lapply(m,rownames)))                          
-  if((grepl(g, "_", fixed=TRUE))==FALSE){
-    g <- gsub("NA", "_", g)
+  if((grepl(g, "NAUnknown", fixed=TRUE))==TRUE){
+    g <- gsub("NAUnknown", "_Unknown", g)
     print('g')
     print(g)
-    g <- c(g,g,g,)
+    g <- c(paste(g, "1", sep = "_", collapse = ""),paste(g, "2", sep = "_", collapse = ""),paste(g, "2", sep = "_", collapse = ""))
     print('g array')
     print(g)
   }
