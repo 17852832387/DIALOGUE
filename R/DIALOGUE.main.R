@@ -103,18 +103,20 @@ DIALOGUE1<-function(rA,k = 5,main,results.dir = "~/Desktop/DIALOGUE.results/",co
     X1<-average.mat.rows(r@X,r@samples,f = averaging.function)
     if(spatial.flag){return(X1)}
     b<-get.abundant(r@samples,abn.c = abn.c,boolean.flag = T)
-    print('105 start')
-    print(b)
-    print(r@X[b,])
-    print(r@samples[b])
+    print('==============105 start')
     p<-p.adjust(apply.anova(X = r@X[b,],y = r@samples[b],MARGIN = 2),method = "BH")
-    print('105 end')
-    print(paste0(r@name,": Removing ",sum(p>p.anova)," of ",length(p)," features."))
-    if(sum(p<p.anova)<5){
-      err.message1<-paste("Only",sum(p<p.anova),r@name,"features passed the ANOVA filter. Try rerunning without",r@name)
-      err.message2<-"Make sure the data includes at least 5 samples where all cell types are well represented."
-      print(err.message1);print(err.message2)
-      stop(paste(err.message1,err.message2,sep = "\n"))}
+    print('p')
+    print(p)
+    print('==============105 end')
+    if(length(p)>0)
+      print(paste0(r@name,": Removing ",sum(p>p.anova)," of ",length(p)," features."))
+      if(sum(p<p.anova)<5){
+        err.message1<-paste("Only",sum(p<p.anova),r@name,"features passed the ANOVA filter. Try rerunning without",r@name)
+        err.message2<-"Make sure the data includes at least 5 samples where all cell types are well represented."
+        print(err.message1);print(err.message2)
+        stop(paste(err.message1,err.message2,sep = "\n"))
+      }
+    }
     X1<-X1[,names(p)[p<p.anova]]
     return(X1)
   })
@@ -219,6 +221,13 @@ DIALOGUE1.PMD<-function(X,k,PMD2 = F,extra.sparse = F,seed1 = 1234){
   }else{
     perm.out <- MultiCCA.permute(X,type=rep("standard",length(X)),trace = F,penalties = sqrt(ncol(X[[1]]))/2)
   }
+  print("before MultiCCA")
+  print("X")
+  print(X)
+  print("perm.out$bestpenalties")
+  print(perm.out$bestpenalties)
+  print("perm.out$ws.init")
+  print(perm.out$ws.init)
   out <- MultiCCA(X, type=rep("standard",length(X)),
                   penalty=perm.out$bestpenalties,niter = 100,
                   ncomponents=k, ws=perm.out$ws.init,trace = F)
