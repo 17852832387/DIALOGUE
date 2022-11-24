@@ -488,8 +488,11 @@ DIALOGUE3<-function(rA,main,results.dir = "~/Desktop/DIALOGUE.results/",full.ver
   names(rA)<-cell.types
   R$pref<-list()
   idx<-unique(get.strsplit(names(R$sig[[1]]),".",1))
+  print('idx')
+  print(idx)
   pairs1<-t(combn(cell.types,2))
-  
+  print('pairs1')
+  print(pairs1)
   for(i in 1:nrow(pairs1)){
     x1<-pairs1[i,1];x2<-pairs1[i,2]
     x<-paste0(x1,".vs.",x2)
@@ -500,6 +503,7 @@ DIALOGUE3<-function(rA,main,results.dir = "~/Desktop/DIALOGUE.results/",full.ver
     R$pref[[x]]<-cbind.data.frame(R = diag(cor(r1@scoresAv[idx,],r2@scoresAv[idx,])),
                                   hlm = DLG.hlm.pval(r1,r2,formula = R$frm))
   }
+  print('end 1:nrow(pairs1)')
   
   R$gene.pval<-lapply(rA,function(r1) r1@gene.pval)
   R$sig1<-lapply(rA,function(r1) r1@sig$sig1)
