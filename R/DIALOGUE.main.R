@@ -609,7 +609,7 @@ DLG.multi.get.gene.pval<-function(cell.type,R){
   print('head(m)')
   print(head(m))
   print('dim(m')
-  print(dim(m)
+  print(dim(m))
   for(i in names(m)){
     x<-m[[i]]
     g1<-paste0(x$program,ifelse(x$up,".up_",".down_"),x$genes)
