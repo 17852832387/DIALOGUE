@@ -649,12 +649,13 @@ DLG.find.scoring<-function(r1,R){
     r1<-DLG.initialize(r1,R)
     return(r1)
   }
-  print('after if')
   gene.pval<-gene.pval[is.element(gene.pval$genes,r1@genes)&!is.na(gene.pval[,1]),]
   g<-sort(unique(gene.pval$genes))
-  print('sorted g')
-  print(g)
-  
+  if(length(g)==0){
+    print("No MCPs identified for none g.")
+    r1<-DLG.initialize(r1,R)
+    return(r1)
+  }
   
   # r1@cca.scores0<-r1@X%*%R$cca$ws[[r1@name]]
   WS<-R$cca$ws[[r1@name]]
