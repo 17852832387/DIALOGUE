@@ -579,8 +579,7 @@ DLG.multi.get.gene.pval<-function(cell.type,R){
   }
   m<-c(lapply(R[b1],f1),lapply(R[b2],function(m1) f1(m1,"p2")))
   print('===============================')
-  print('m')
-  print(head(m))
+  
   g<-unique(unlist(lapply(m,rownames)))   
   if(length(g)==1){
     print('g singleton')
@@ -597,24 +596,23 @@ DLG.multi.get.gene.pval<-function(cell.type,R){
   }
 
   p<-get.strsplit(g,"_",1:2)
-  print('p')
-  print(head(p))
   colnames(p)<-c("programF","genes")
-  print('p colnames')
-  print(head(p))
+  
   rownames(p)<-g
-  print('p rownames')
-  print(head(p))
   p<-cbind.data.frame(p,program = get.strsplit(g,".",1),
                       up = grepl("up",g))
   names(m)<-gsub(paste0(cell.type,".vs."),"",names(m))
   names(m)<-gsub(paste0(".vs.",cell.type),"",names(m))
-  print('names(m)<-gsub(paste0(".vs.",cell.type),"",names(m))')
-  print(names(m))
+  
   print('length(m')
   print(length(m))
   for(i in names(m)){
+    print('===============================')
+    print('i')
+    print(i)
     x<-m[[i]]
+    print('x')
+    print(x)
     g1<-paste0(x$program,ifelse(x$up,".up_",".down_"),x$genes)
     idx<-match(g,g1)
     p[,i]<-x$Z[idx]
