@@ -605,6 +605,11 @@ DLG.multi.get.gene.pval<-function(cell.type,R){
                       up = grepl("up",g))
   names(m)<-gsub(paste0(cell.type,".vs."),"",names(m))
   names(m)<-gsub(paste0(".vs.",cell.type),"",names(m))
+  print('names(m)<-gsub(paste0(".vs.",cell.type),"",names(m))')
+  print('head(m)')
+  print(head(m))
+  print('dim(m')
+  print(dim(m)
   for(i in names(m)){
     x<-m[[i]]
     g1<-paste0(x$program,ifelse(x$up,".up_",".down_"),x$genes)
