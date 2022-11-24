@@ -649,8 +649,12 @@ DLG.find.scoring<-function(r1,R){
     r1<-DLG.initialize(r1,R)
     return(r1)
   }
+  print('after if')
   gene.pval<-gene.pval[is.element(gene.pval$genes,r1@genes)&!is.na(gene.pval[,1]),]
   g<-sort(unique(gene.pval$genes))
+  print('sorted g')
+  print(g)
+  
   
   # r1@cca.scores0<-r1@X%*%R$cca$ws[[r1@name]]
   WS<-R$cca$ws[[r1@name]]
@@ -673,6 +677,9 @@ DLG.find.scoring<-function(r1,R){
     return(list(gene.pval = gene.pval,scores = scores))
   }
   m<-lapply(colnames(r1@extra.scores$cca0), f)
+  print('lapply m')
+  print(m)
+  
   # r1@scores0<-t(laply(m,function(x) x$scores))
   conf.m<-r1@metadata[,is.element(colnames(r1@metadata),R$conf)]
   r1@extra.scores$nnl0<-t(laply(m,function(x){return(as.matrix(x$scores))}))
@@ -681,7 +688,10 @@ DLG.find.scoring<-function(r1,R){
   r1@scores<-t(get.residuals(t(r1@extra.scores$nnl0),conf.m))
   r1@scoresAv<-average.mat.rows(r1@scores,r1@samples)
   r1@gene.pval<-NULL
+  print('start for m')
   for(x in m){
+    print('x in m')
+    print(x)
     r1@gene.pval<-rbind(r1@gene.pval,x$gene.pval)
   }
   m1<-r1@gene.pval
