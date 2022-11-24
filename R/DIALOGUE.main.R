@@ -577,8 +577,9 @@ DLG.multi.get.gene.pval<-function(cell.type,R){
   print('===============================')
   print('m')
   print(m)
-  g<-unique(unlist(lapply(m,rownames)))                          
-  if((grepl(g, "NAUnknown", fixed=TRUE))==TRUE){
+  g<-unique(unlist(lapply(m,rownames)))   
+  print((grepl(g, "NAUnk", fixed=TRUE))==TRUE)
+  if((grepl(g, "NAUnk", fixed=TRUE))==TRUE){
     g <- gsub("NAUnknown", "_Unknown", g)
     print('g')
     print(g)
