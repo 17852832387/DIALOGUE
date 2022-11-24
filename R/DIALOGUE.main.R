@@ -578,15 +578,18 @@ DLG.multi.get.gene.pval<-function(cell.type,R){
   print('m')
   print(m)
   g<-unique(unlist(lapply(m,rownames)))   
-                               
-  print((grepl("NAUnknown", g, fixed=TRUE))==TRUE)
-  if((grepl("NAUnknown", g, fixed=TRUE))==TRUE){
-    g <- gsub("NAUnknown", "_Unknown", g)
-    print('g')
+  if(length(g)==1){
+    print('g singleton')
     print(g)
-    g <- c(paste(g, "1", sep = "_", collapse = ""),paste(g, "2", sep = "_", collapse = ""),paste(g, "2", sep = "_", collapse = ""))
-    print('g array')
-    print(g)
+    print((grepl("NAUnknown", g, fixed=TRUE))==TRUE)
+    if((grepl("NAUnknown", g, fixed=TRUE))==TRUE){
+      g <- gsub("NAUnknown", "_Unknown", g)
+      print('g')
+      print(g)
+      g <- c(paste(g, "1", sep = "_", collapse = ""),paste(g, "2", sep = "_", collapse = ""),paste(g, "2", sep = "_", collapse = ""))
+      print('g array')
+      print(g)
+    }
   }
 
   p<-get.strsplit(g,"_",1:2)
